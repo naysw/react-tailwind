@@ -8,8 +8,8 @@
     "url": "https://github.com/naysw"
   },
   "license": "MIT",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
