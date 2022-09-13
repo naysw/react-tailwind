@@ -1,19 +1,31 @@
+import commonjs from "@rollup/plugin-commonjs";
+import nodeResolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
+import PeerDepsExternalPlugin from "rollup-plugin-peer-deps-external";
+import postcss from "rollup-plugin-postcss";
 
 import pkg from "./package.json";
 
-const external = Object.keys(pkg.dependencies).concat([
-  "path",
-  "fs",
-  "typescript",
-]);
-
 export default {
   input: "src/index.ts",
-  plugins: [typescript({ sourceMap: false })],
-  external,
+  plugins: [
+    commonjs(),
+    nodeResolve({ browser: true }),
+    typescript(),
+    postcss(),
+    PeerDepsExternalPlugin(),
+  ],
   output: [
-    { format: "cjs", file: pkg.main, exports: "auto" },
-    { format: "esm", file: pkg.module },
+    {
+      format: "cjs",
+      file: pkg.main,
+      exports: "auto",
+      sourcemap: true,
+    },
+    {
+      format: "esm",
+      file: pkg.module,
+      sourcemap: true,
+    },
   ],
 };
